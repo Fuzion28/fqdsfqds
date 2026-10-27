@@ -1,6 +1,5 @@
 package com.sonora.music.ui.components
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -91,7 +90,7 @@ fun SongRow(
         if (showArtwork) {
             Box {
                 Artwork(song.art, song.album, Modifier.size(50.dp), RoundedCornerShape(4.dp))
-                AnimatedVisibility(
+                androidx.compose.animation.AnimatedVisibility(
                     visible = isCurrent,
                     enter = fadeIn() + scaleIn(initialScale = 0.6f),
                     exit = fadeOut() + scaleOut(targetScale = 0.6f),
