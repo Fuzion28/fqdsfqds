@@ -1,0 +1,42 @@
+name: Build APK
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build release APK
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --stacktrace
+          mv app/build/outputs/apk/release/app-release.apk Sonora.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Sonora-apk
+          path: Sonora.apk
+
+      - name: Publish to "apk-latest" release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk-latest
+          name: Sonora (dernière build)
+          body: APK généré automatiquement depuis `${{ github.ref_name }}` (${{ github.sha }}).
+          prerelease: true
+          make_latest: false
+          files: Sonora.apk

@@ -1,0 +1,11 @@
+<resources>
+    <color name="sonora_bg">#FF0B0B0F</color>
+    <color name="sonora_green">#FF1ED760</color>
+
+    <style name="Theme.Sonora" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/sonora_bg</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:colorAccent">@color/sonora_green</item>
+    </style>
+</resources>
